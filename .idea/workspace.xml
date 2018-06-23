@@ -7,7 +7,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="125ace7c-ae70-4656-8ce2-f4caafb2a5a3" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/sendgrid_java.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tools/DefaultKey.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tools/MailBySendgrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/BoxHelper.jar" afterPath="$PROJECT_DIR$/BoxHelper.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/boxHelper.iml" afterPath="$PROJECT_DIR$/boxHelper.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/config.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoxHelper.java" afterPath="$PROJECT_DIR$/src/BoxHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/ConvertJson.java" afterPath="$PROJECT_DIR$/src/tools/ConvertJson.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +36,8 @@
       <file leaf-file-name="BoxHelper.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/BoxHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="177" column="65" lean-forward="true" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
+            <state relative-caret-position="466">
+              <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -40,7 +48,7 @@
       <file leaf-file-name="Spider.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/models/Spider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-36">
+            <state relative-caret-position="1411">
               <caret line="83" column="43" lean-forward="false" selection-start-line="83" selection-start-column="43" selection-end-line="83" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -63,8 +71,33 @@
       <file leaf-file-name="ConvertJson.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tools/ConvertJson.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-468">
-              <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
+            <state relative-caret-position="1054">
+              <caret line="62" column="65" lean-forward="false" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefaultKey.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tools/DefaultKey.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+              <folding>
+                <element signature="e#124#125#0" expanded="true" />
+                <element signature="e#218#219#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MailBySendgrid.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tools/MailBySendgrid.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="438">
+              <caret line="39" column="18" lean-forward="true" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -140,8 +173,12 @@
         <option value="$PROJECT_DIR$/src/models/MTeam.java" />
         <option value="$PROJECT_DIR$/src/models/Type1.java" />
         <option value="$PROJECT_DIR$/src/models/Tes.java" />
-        <option value="$PROJECT_DIR$/src/tools/ConvertJson.java" />
         <option value="$PROJECT_DIR$/src/models/Spider.java" />
+        <option value="$PROJECT_DIR$/src/hidden/defaultKey.java" />
+        <option value="$PROJECT_DIR$/src/DefaultKey.java" />
+        <option value="$PROJECT_DIR$/src/tools/DefaultKey.java" />
+        <option value="$PROJECT_DIR$/src/tools/ConvertJson.java" />
+        <option value="$PROJECT_DIR$/src/tools/MailBySendgrid.java" />
         <option value="$PROJECT_DIR$/src/BoxHelper.java" />
       </list>
     </option>
@@ -258,7 +295,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.18355185" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -282,6 +319,26 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.BoxHelper">
+    <configuration default="false" name="Tes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="models.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="models.Tes" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="boxHelper" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="false" name="BoxHelper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="BoxHelper" />
@@ -305,26 +362,6 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="tools.ConvertJson" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="boxHelper" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="false" name="Tes" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="models.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="models.Tes" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -708,10 +745,31 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Application.BoxHelper" />
-      <item index="1" class="java.lang.String" itemvalue="Application.ConvertJson" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Tes" />
+    <configuration default="false" name="MailBySendgrid" type="Application" factoryName="Application" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="tools.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="tools.MailBySendgrid" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="boxHelper" />
+      <envs />
+      <method />
+    </configuration>
+    <list size="4">
+      <item index="0" class="java.lang.String" itemvalue="Application.MailBySendgrid" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Tes" />
+      <item index="2" class="java.lang.String" itemvalue="Application.BoxHelper" />
+      <item index="3" class="java.lang.String" itemvalue="Application.ConvertJson" />
     </list>
     <recent_temporary>
       <list size="3">
@@ -738,12 +796,12 @@
       <workItem from="1528604964865" duration="6117000" />
       <workItem from="1528614691769" duration="1162000" />
       <workItem from="1528713736645" duration="74155000" />
-      <workItem from="1529412055025" duration="23633000" />
+      <workItem from="1529412055025" duration="28242000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="205277000" />
+    <option name="totallyTimeSpent" value="209886000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
@@ -762,13 +820,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23521851" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23521851" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32262212" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17352185" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16736111" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -795,13 +853,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BoxHelper.java</url>
-          <line>124</line>
+          <line>128</line>
           <properties />
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BoxHelper.java</url>
-          <line>86</line>
+          <line>90</line>
           <properties />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
@@ -815,24 +873,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/BoxHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="71" column="9" lean-forward="false" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tools/ExecuteShell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="32" lean-forward="false" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tools/ConvertJson.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1033,14 +1073,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Type1.java" />
-    <entry file="file://$PROJECT_DIR$/src/tools/ExecuteShell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Tes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="82">
@@ -1049,19 +1081,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tools/ConvertJson.java">
+    <entry file="file://$PROJECT_DIR$/src/hidden/defaultKey.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-468">
-          <caret line="41" column="38" lean-forward="false" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="87" lean-forward="false" selection-start-line="8" selection-start-column="87" selection-end-line="8" selection-end-column="87" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/Spider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-36">
+        <state relative-caret-position="1411">
           <caret line="83" column="43" lean-forward="false" selection-start-line="83" selection-start-column="43" selection-end-line="83" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1070,10 +1100,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/ExecuteShell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="18" column="44" lean-forward="false" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/ConvertJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="65" lean-forward="false" selection-start-line="62" selection-start-column="54" selection-end-line="62" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/DefaultKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="3" lean-forward="true" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="3" />
+          <folding>
+            <element signature="e#124#125#0" expanded="true" />
+            <element signature="e#218#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/MailBySendgrid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="438">
+          <caret line="39" column="18" lean-forward="true" selection-start-line="39" selection-start-column="18" selection-end-line="39" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/BoxHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="177" column="65" lean-forward="true" selection-start-line="177" selection-start-column="65" selection-end-line="177" selection-end-column="65" />
+        <state relative-caret-position="466">
+          <caret line="199" column="0" lean-forward="true" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1147,7 +1216,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>htmlunit-driver-2.30.1-jar-with-dependencies</last-edited>
+          <last-edited>sendgrid-java</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

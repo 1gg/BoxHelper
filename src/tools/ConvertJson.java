@@ -14,7 +14,7 @@ import java.util.*;
 import static java.nio.file.Paths.get;
 
 /**
- * Created by wzf on 2018/6/11.
+ * Created by SpereShelde on 2018/6/11.
  */
 public class ConvertJson {
 
@@ -55,6 +55,12 @@ public class ConvertJson {
         }
         if (object.has("diskLimit")) {
             configures.put("diskLimit", object.get("diskLimit").getAsInt());
+        }
+        if (object.has("email")) {
+            configures.put("email", object.get("email").getAsString());
+        }
+        if (object.has("sendgridKey")) {
+            configures.put("sendgridKey", object.get("sendgridKey").getAsString());
         }
         if (object.has("cycle")) {
             configures.put("cycle", object.get("cycle").getAsDouble());

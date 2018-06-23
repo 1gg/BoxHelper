@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="sendgrid-java">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../sendgrid-java.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../sendgrid-java.jar!/" />
+    </SOURCES>
+  </library>
+</component>

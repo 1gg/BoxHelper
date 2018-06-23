@@ -1,12 +1,17 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import models.Spider;
+import org.apache.xpath.SourceTree;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import tools.ConvertJson;
+import tools.DefaultKey;
+import tools.MailBySendgrid;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +36,8 @@ public class BoxHelper {
     private void getConfigures() {// Get configures from file.
 
         driver.setJavascriptEnabled(false);
-//        Logger logger = Logger.getLogger("");
-//        logger.setLevel(Level.OFF);
+        Logger logger = Logger.getLogger("");
+        logger.setLevel(Level.OFF);
         try {
             configures = ConvertJson.convertConfigure("config.json");
         } catch (IOException e) {
@@ -71,7 +76,6 @@ public class BoxHelper {
         String maxDisk = "/home";
         try {
             Runtime runtime = Runtime.getRuntime();
-//            Process process = runtime.exec("sh -c df -l | /usr/bin/awk '{print $4, $5, $9}'");
             Process process = runtime.exec("df -l");
             process.waitFor();
             BufferedReader in = null;
@@ -173,6 +177,27 @@ public class BoxHelper {
             if (limit != -1 && limit != 0) {
                 if (!boxHelper.canContinue(maxDisk, limit)){
                     System.out.println("Reached limit, exit.");
+                    if (!"".equals(boxHelper.configures.get("email").toString())) {
+                        MailBySendgrid mailBySendgrid = null;
+                        try {
+                            InetAddress inetAddress = InetAddress.getLocalHost();
+                            if (!"".equals(boxHelper.configures.get("sendgridKey").toString())) {
+                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", boxHelper.configures.get("sendgridKey").toString());
+                            }else {
+                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", DefaultKey.getKey());
+                            }
+                            if (mailBySendgrid.send()){
+                                System.out.println("Email sent.");
+                            }else {
+                                System.out.println("Cannot send email.");
+                            }
+                        } catch (UnknownHostException e) {
+                            System.out.println("Cannot get IP.");
+                        } catch (IOException e) {
+                            System.out.println("Cannot send email.");
+                        }
+                    }
+
                     System.exit(111);
                 } else {
                     System.out.println("Under limit, continue.");

@@ -9,6 +9,8 @@
     "max":-1,
     "path":"/home/root/deluge/watch",
     "diskLimit":95,
+    "email":"",
+    "sendgridKey":"",
     "cycle":0.5
 }
 
