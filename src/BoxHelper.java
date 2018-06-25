@@ -137,7 +137,7 @@ public class BoxHelper {
                 }
                 current = Integer.parseInt(line.substring(line.indexOf("%") - 2, line.indexOf("%")));
                 System.out.println("Current disk use is : " + current);
-                if (current > limit) flag = false;
+                if (current >= limit) flag = false;
                 in.close();
             } catch (Exception e) {
                 System.out.println("Cannot restrict 1.");
@@ -174,6 +174,8 @@ public class BoxHelper {
             spiders.add(new Spider(url.substring(url.indexOf("//") + 2, url.indexOf("/", 8)), url, boxHelper.configures.get("path").toString(), type, Double.parseDouble(boxHelper.configures.get("min").toString()), Double.parseDouble(boxHelper.configures.get("max").toString()), boxHelper.driver));
         }
         while (true){
+            ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
+            System.out.println("\nBoxHelper " + count + " begins at " + time());
             if (limit != -1 && limit != 0) {
                 if (!boxHelper.canContinue(maxDisk, limit)){
                     System.out.println("Reached limit, exit.");
@@ -203,8 +205,6 @@ public class BoxHelper {
                     System.out.println("Under limit, continue.");
                 }
             }
-            ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
-            System.out.println("\nBoxHelper " + count + " begins at " + time());
 
             for (Spider spider: spiders) {
                 executorService.execute(spider);
