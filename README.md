@@ -1,10 +1,10 @@
-# BoxHelper
-
+# BoxHelper - with email notification
+# 这是BoxHelper的一个分支，有邮件提醒功能
 ## 使用; How to use
 
 克隆仓库; Clone this repository:
 
-`git clone https://github.com/SpereShelde/BoxHelper.git && cd BoxHelper`
+`git clone -b withEmailNotification https://github.com/SpereShelde/BoxHelper.git && cd BoxHelper`
 
 安装环境，仅使用一次; Build environment for the first time: `bash java.sh`
 
