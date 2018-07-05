@@ -14,13 +14,13 @@ import java.util.*;
 import static java.nio.file.Paths.get;
 
 /**
- * Created by wzf on 2018/6/11.
+ * Created by SpereShelde on 2018/6/11.
  */
 public class ConvertJson {
 
     public static Map convertConfigure(String jsonFileName) throws IOException {
 
-        ArrayList<String> urls = new ArrayList<>();
+        ArrayList<String> action = new ArrayList<>();
         Map configures = new HashMap();
         JsonParser jsonParser = new JsonParser();
         String content = null;
@@ -31,33 +31,40 @@ public class ConvertJson {
 
         JsonObject object = (JsonObject) jsonParser.parse(content);
 
-        if (object.has("urls")) {
-            JsonArray array = object.get("urls").getAsJsonArray();
-            for (JsonElement a: array) {
-                if (a != null || !"".equals(a.getAsString())) urls.add(a.getAsString());
+        String webUI = object.get("webUI").getAsString();
+        if (webUI.endsWith("/")) webUI = webUI.substring(0, webUI.length() - 1);
+        configures.put("webUI", webUI);
+        configures.put("sessionID", object.get("sessionID").getAsString());
+        configures.put("diskUsedPercentage", object.get("diskUsedPercentage").getAsInt());
+        JsonArray arrayAction = object.get("actionAfterLimit").getAsJsonArray();
+        for (JsonElement a: arrayAction) {
+            if (a != null || !"".equals(a.getAsString())) action.add(a.getAsString());
+        }
+        configures.put("action", action);
+        configures.put("runningCycleInSec", object.get("runningCycleInSec").getAsInt());
+        JsonArray arrayURL = object.get("url&speedLimit").getAsJsonArray();
+        ArrayList<String> urls = new ArrayList<>();
+        for (JsonElement a: arrayURL) {
+            JsonArray url = a.getAsJsonArray();
+            String min = url.get(1).getAsString();
+            String max = url.get(2).getAsString();
+            String down = url.get(3).getAsString();
+            String up = url.get(4).getAsString();
+            if ("".equals(min)) min = "-1";
+            if ("".equals(max)) max = "-1";
+            if ("".equals(down)) down = "-1";
+            if ("".equals(up)) up = "-1";
+            if (!"".equals(url.get(0).getAsString())) {
+                configures.put(url.get(0).getAsString(), min + "/" + max + "/" + down + "/" + up);
+                urls.add(url.get(0).getAsString());
             }
-            configures.put("urls", urls);
         }
-        if (object.has("isFree")) {
-            configures.put("isFree", object.get("isFree").getAsBoolean());
+        configures.put("urls", urls);
+        if (object.has("email")) {
+            configures.put("email", object.get("email").getAsString());
         }
-        if (object.has("isSticky")) {
-            configures.put("isSticky", object.get("isSticky").getAsBoolean());
-        }
-        if (object.has("min")) {
-            configures.put("min", object.get("min").getAsDouble());
-        }
-        if (object.has("max")) {
-            configures.put("max", object.get("max").getAsDouble());
-        }
-        if (object.has("path")) {
-            configures.put("path", object.get("path").getAsString());
-        }
-        if (object.has("diskLimit")) {
-            configures.put("diskLimit", object.get("diskLimit").getAsInt());
-        }
-        if (object.has("cycle")) {
-            configures.put("cycle", object.get("cycle").getAsDouble());
+        if (object.has("sendgridKey")) {
+            configures.put("sendgridKey", object.get("sendgridKey").getAsString());
         }
         return configures;
     }
@@ -106,6 +113,7 @@ public class ConvertJson {
         }
         return cookies;
     }
+
 }
 
 

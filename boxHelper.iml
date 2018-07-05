@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="htmlunit-driver-2.30.1-jar-with-dependencies" level="project" />
+    <orderEntry type="library" name="sendgrid-java" level="project" />
   </component>
 </module>

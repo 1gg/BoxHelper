@@ -1,14 +1,12 @@
 {
-    "urls":[
-	"https://open.cd/torrents.php?boardid=1",
-	"https://tp.m-team.cc/movie.php"
+    "webUI":"http://195.154.231.219:2017",
+    "sessionID":"6rCkVVd/tXqV3kJcZ8XJ6aHJuxrWX6I1",
+    "diskUsedPercentage":98,
+    "actionAfterLimit":["delete", "3", "slow"],
+    "runningCycleInSec":20,
+    "url&speedLimit":[
+	["https://tp.m-team.cc/movie.php", "-1", "-1", "36", "12"]
     ],
-    "isFree":true,
-    "isSticky":false,
-    "min":-1,
-    "max":-1,
-    "path":"/home/root/deluge/watch",
-    "diskLimit":95,
-    "cycle":0.5
+    "email":"",
+    "sendgridKey":""
 }
-

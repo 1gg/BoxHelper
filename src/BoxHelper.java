@@ -1,12 +1,18 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import models.Spider;
+import com.sendgrid.Mail;
+import models.NexusPHP;
+import net.bytebuddy.dynamic.Nexus;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import tools.ConvertJson;
+import tools.DefaultKey;
+import tools.MailBySendgrid;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,16 +31,13 @@ import static java.lang.Thread.sleep;
 public class BoxHelper {
 
     private Map configures = new HashMap();
-    private Map passkeys = new HashMap();
-    private HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.CHROME);
+    private Map cookies = new HashMap();
+    private Map drivers = new HashMap();
 
     private void getConfigures() {// Get configures from file.
 
-        driver.setJavascriptEnabled(false);
-//        Logger logger = Logger.getLogger("");
-//        logger.setLevel(Level.OFF);
         try {
-            configures = ConvertJson.convertConfigure("config.json");
+            this.configures = ConvertJson.convertConfigure("config.json");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,17 +55,26 @@ public class BoxHelper {
             e.printStackTrace();
         }
 
+        System.out.println("Loading cookies ...");
         for (Path path: jsonFiles) {
-            System.out.println("Loading " +  path.getFileName().toString() + "...");
             try {
-                driver.get("http://" + path.getFileName().toString().substring(0, path.getFileName().toString().length() - 5));
-                for (Cookie cookie :ConvertJson.convertCookie(path.toString())) {
-                    driver.manage().addCookie(cookie);
-                }
+                String domainName = path.getFileName().toString();
+                cookies.put(domainName.substring(0, domainName.lastIndexOf(".")), ConvertJson.convertCookie(path.toString()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        ArrayList<String> urls = (ArrayList<String>) this.configures.get("urls");
+        urls.forEach(url -> {
+            HtmlUnitDriver driver = new HtmlUnitDriver(BrowserVersion.FIREFOX_45, false);
+            String domain = url.substring(url.indexOf("//") + 2, url.indexOf("/", url.indexOf("//") + 2));
+            driver.get("http://" + domain);
+            ArrayList<Cookie> cookiesT = (ArrayList) cookies.get(domain);
+            cookiesT.forEach(cookie -> driver.manage().addCookie(cookie));
+            drivers.put(url, driver);
+        });
+
         System.out.println("Initialization done.");
     }
 
@@ -71,7 +83,6 @@ public class BoxHelper {
         String maxDisk = "/home";
         try {
             Runtime runtime = Runtime.getRuntime();
-//            Process process = runtime.exec("sh -c df -l | /usr/bin/awk '{print $4, $5, $9}'");
             Process process = runtime.exec("df -l");
             process.waitFor();
             BufferedReader in = null;
@@ -132,8 +143,8 @@ public class BoxHelper {
                     line = in.readLine();
                 }
                 current = Integer.parseInt(line.substring(line.indexOf("%") - 2, line.indexOf("%")));
-                System.out.println("Current disk use is : " + current);
-                if (current > limit) flag = false;
+                System.out.println("Current disk use : " + current);
+                if (current >= limit) flag = false;
                 in.close();
             } catch (Exception e) {
                 System.out.println("Cannot restrict 1.");
@@ -148,45 +159,66 @@ public class BoxHelper {
 
     public static void main(String[] args) {
 
+        Logger logger = Logger.getLogger("");
+        logger.setLevel(Level.OFF);
         BoxHelper boxHelper = new BoxHelper();
         boxHelper.getConfigures();
-        int type = 0;
-        if ("true".equals(boxHelper.configures.get("isFree").toString())){
-            type += 1;
-        }
-        if ("true".equals(boxHelper.configures.get("isSticky").toString())) {
-            type += 2;
-        }
         String maxDisk = "";
-        int limit = Integer.parseInt(boxHelper.configures.get("diskLimit").toString());
+        int limit = Integer.parseInt(boxHelper.configures.get("diskUsedPercentage").toString());
         if (limit != -1 && limit != 0) {
             maxDisk = boxHelper.getMaxDisk();
         }
         int cpuThreads = Runtime.getRuntime().availableProcessors();
         int count  = 1;
-        ArrayList<Spider> spiders = new ArrayList<>();
-        ArrayList<String> urls = (ArrayList<String>) boxHelper.configures.get("urls");
-        for (String url: urls){
-            spiders.add(new Spider(url.substring(url.indexOf("//") + 2, url.indexOf("/", 8)), url, boxHelper.configures.get("path").toString(), type, Double.parseDouble(boxHelper.configures.get("min").toString()), Double.parseDouble(boxHelper.configures.get("max").toString()), boxHelper.driver));
-        }
+
+        ArrayList<NexusPHP> nexusPHPS = new ArrayList<>();
+        boxHelper.drivers.forEach((url, driver) -> {
+            String[] urlAndLimit = boxHelper.configures.get(url).toString().split("/");
+            Map qbconfig = new HashMap();
+            qbconfig.put("webUI", boxHelper.configures.get("webUI").toString());
+            qbconfig.put("sessionID", boxHelper.configures.get("sessionID").toString());
+            nexusPHPS.add(new NexusPHP(url.toString(), Double.parseDouble(urlAndLimit[0]), Double.parseDouble(urlAndLimit[1]), Double.parseDouble(urlAndLimit[2]),Double.parseDouble(urlAndLimit[3]), (HtmlUnitDriver)driver, qbconfig));
+        });
+
         while (true){
+            ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
+            System.out.println("\nBoxHelper " + count + " begins at " + time());
             if (limit != -1 && limit != 0) {
                 if (!boxHelper.canContinue(maxDisk, limit)){
                     System.out.println("Reached limit, exit.");
+                    if (!"".equals(boxHelper.configures.get("email").toString())) {
+                        MailBySendgrid mailBySendgrid = null;
+                        try {
+                            InetAddress inetAddress = InetAddress.getLocalHost();
+                            if (!"".equals(boxHelper.configures.get("sendgridKey").toString())) {
+                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", boxHelper.configures.get("sendgridKey").toString());
+                            }else {
+                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", DefaultKey.getKey());
+                            }
+                            if (mailBySendgrid.send()){
+                                System.out.println("Email sent.");
+                            }else {
+                                System.out.println("Cannot send email.");
+                            }
+                        } catch (UnknownHostException e) {
+                            System.out.println("Cannot get IP.");
+                        } catch (IOException e) {
+                            System.out.println("Cannot send email.");
+                        }
+                    }
+
                     System.exit(111);
                 } else {
                     System.out.println("Under limit, continue.");
                 }
             }
-            ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
-            System.out.println("\nBoxHelper " + count + " begins at " + time());
 
-            for (Spider spider: spiders) {
-                executorService.execute(spider);
-            }
+            nexusPHPS.forEach(nexusPHP -> {
+                executorService.submit(nexusPHP);
+            });
             executorService.shutdown();
             try {
-                sleep((long) (1000*60*Double.valueOf(boxHelper.configures.get("cycle").toString())));
+                sleep((long) (1000*Double.valueOf(boxHelper.configures.get("runningCycleInSec").toString())));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
