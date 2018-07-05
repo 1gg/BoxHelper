@@ -34,7 +34,7 @@ public class NexusPHP implements Runnable {
         this.driver = driver;
         this.qbConfig = qbConfig;
         this.getPasskey();
-        qBittorrent = new QBittorrent(this.qbConfig.get("sessionID"), url, this.qbConfig.get("webUI"), this.urls, this.down, this.up);
+        qBittorrent = new QBittorrent(this.qbConfig.get("webUI"), this.qbConfig.get("sessionID"), url, this.urls, this.down, this.up);
     }
 
     private void getPasskey() {

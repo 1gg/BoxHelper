@@ -1,7 +1,5 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.sendgrid.Mail;
 import models.NexusPHP;
-import net.bytebuddy.dynamic.Nexus;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import tools.ConvertJson;

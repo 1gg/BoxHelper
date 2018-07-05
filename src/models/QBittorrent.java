@@ -24,7 +24,7 @@ public class QBittorrent{
         this.urls = urls;
     }
 
-    public QBittorrent(String sessionID, String webUI, String site, ArrayList<String> urls, double upload, double download) {
+    public QBittorrent(String webUI, String sessionID, String site, ArrayList<String> urls, double download, double upload) {
         this.sessionID = sessionID;
         if (webUI.lastIndexOf("/") == webUI.length() - 1) {
             this.webUI = webUI.substring(0, webUI.length() - 1);
@@ -41,20 +41,21 @@ public class QBittorrent{
 
         if (this.apiVersion == 0){
             try {
-                apiVersion = Integer.parseInt(HttpHelper.doGet(webUI + "/version/api", "Fiddler", sessionID, "127.0.0.1"));
+                apiVersion = Integer.parseInt(HttpHelper.doGet(webUI + "/version/api", "Fiddler", sessionID, "195.154.231.219"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if (apiVersion >= 7){
-            Map<String, String> contents = new HashMap<String, String>();
+            Map<String, String> contents = new HashMap();
             StringBuilder links = new StringBuilder();
             urls.forEach(url -> links.append(url + "\n"));
             contents.put("urls", links.toString());
             contents.put("dlLimit", new BigDecimal(download * 1024 * 1024 + "").toPlainString());
             contents.put("upLimit", new BigDecimal(upload * 1024 * 1024 + "").toPlainString());
             try {
-                Boolean success =  HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "127.0.0.1", contents);
+                HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "195.154.231.219", contents);
+                Boolean success =  HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "195.154.231.219", contents);
                 if (success) System.out.println("Successfully add torrents in " + site + ".");
                 else System.out.println("Cannot add torrents above, please check your session ID.");
             } catch (IOException e) {

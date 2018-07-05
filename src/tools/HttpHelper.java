@@ -52,7 +52,6 @@ public class HttpHelper {
         httpPost.addHeader("User-Agent", userAgent);
         httpPost.addHeader("Cookie", "SID=" + cookieValue);
         httpPost.addHeader("Host", host);
-//        httpPost.addHeader("Content-Type", "multipart/form-data");
         MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
         contents.forEach((k,v) -> multipartEntityBuilder.addTextBody(k, v));
         httpPost.setEntity(multipartEntityBuilder.build());
