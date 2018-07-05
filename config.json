@@ -1,6 +1,6 @@
 {
-    "webUI":"http://195.154.231.219:2017",
-    "sessionID":"6rCkVVd/tXqV3kJcZ8XJ6aHJuxrWX6I1",
+    "webUI":"",
+    "sessionID":"",
     "diskUsedPercentage":98,
     "actionAfterLimit":["delete", "3", "slow"],
     "runningCycleInSec":20,
