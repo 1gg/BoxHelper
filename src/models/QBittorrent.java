@@ -41,7 +41,7 @@ public class QBittorrent{
 
         if (this.apiVersion == 0){
             try {
-                apiVersion = Integer.parseInt(HttpHelper.doGet(webUI + "/version/api", "Fiddler", sessionID, "195.154.231.219"));
+                apiVersion = Integer.parseInt(HttpHelper.doGet(webUI + "/version/api", "Fiddler", sessionID, "127.0.0.1"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,8 +54,7 @@ public class QBittorrent{
             contents.put("dlLimit", new BigDecimal(download * 1024 * 1024 + "").toPlainString());
             contents.put("upLimit", new BigDecimal(upload * 1024 * 1024 + "").toPlainString());
             try {
-                HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "195.154.231.219", contents);
-                Boolean success =  HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "195.154.231.219", contents);
+                Boolean success =  HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "127.0.0.1", contents);
                 if (success) System.out.println("Successfully add torrents in " + site + ".");
                 else System.out.println("Cannot add torrents above, please check your session ID.");
             } catch (IOException e) {
