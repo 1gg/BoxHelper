@@ -72,8 +72,8 @@ public class BoxHelper {
 
     public static void main(String[] args) {
 
-//        Logger logger = Logger.getLogger("");
-//        logger.setLevel(Level.OFF);
+        Logger logger = Logger.getLogger("");
+        logger.setLevel(Level.OFF);
         BoxHelper boxHelper = new BoxHelper();
         boxHelper.getConfigures();
         int cpuThreads = Runtime.getRuntime().availableProcessors();
@@ -92,7 +92,7 @@ public class BoxHelper {
             ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
             System.out.println("\nBoxHelper " + count + " begins at " + time());
             Object[] actions = (Object[]) boxHelper.configures.get("action");
-//            executorService.submit(new QBChecker(boxHelper.configures.get("webUI").toString(), boxHelper.configures.get("sessionID").toString(), new Long(boxHelper.configures.get("diskLimit").toString()).longValue() * 1073741824, new String[]{actions[0].toString(), actions[1].toString()}));
+            executorService.submit(new QBChecker(boxHelper.configures.get("webUI").toString(), boxHelper.configures.get("sessionID").toString(), new Long(boxHelper.configures.get("diskLimit").toString()).longValue() * 1073741824, new String[]{actions[0].toString(), actions[1].toString()}));
             nexusPHPS.forEach(nexusPHP -> {
                 executorService.submit(nexusPHP);
             });
