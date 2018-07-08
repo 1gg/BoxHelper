@@ -1,16 +1,10 @@
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import models.NexusPHP;
+import models.QBChecker;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import tools.ConvertJson;
-import tools.DefaultKey;
-import tools.MailBySendgrid;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,96 +70,12 @@ public class BoxHelper {
         System.out.println("Initialization done.");
     }
 
-    private String getMaxDisk(){
-
-        String maxDisk = "/home";
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            Process process = runtime.exec("df -l");
-            process.waitFor();
-            BufferedReader in = null;
-            try {
-                in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                int maxSize = 0;
-                int currentSize = 0;
-                String line = in.readLine().replaceAll("\\s+", " ");
-                String[] temp = line.split(" ");
-                int indexofA = 0;
-                int indexofP = 0;
-                int indexofM = 0;
-                int count = 0;
-                for (String s:temp) {
-                    if (s.contains("Avail")){
-                        indexofA = count;
-                    }
-                    if (s.contains("%")){
-                        indexofP = count;
-                    }
-                    if (s.contains("Mount")){
-                        indexofM = count;
-                    }
-                    count++;
-                }
-                while ((line = in.readLine()) != null) {
-                    temp = line.replaceAll("\\s+", " ").split(" ");
-                    currentSize = Integer.parseInt(temp[indexofA]);
-                    if (currentSize > maxSize){
-                        maxSize = currentSize;
-                        maxDisk = temp[indexofM];
-                    }
-                }
-                in.close();
-            } catch (Exception e) {
-                System.out.println("Cannot get max disk 1.");
-                System.exit(107);
-            }
-        } catch (Exception e) {
-            System.out.println("Cannot get max disk 2.");
-            System.exit(108);
-        }
-        System.out.println("The max disk is " + maxDisk);
-        return maxDisk;
-    }
-
-    private boolean canContinue(String disk, int limit){
-        boolean flag = true;
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            Process process = runtime.exec("df -l");
-            BufferedReader in = null;
-            int current = 0;
-            try {
-                in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-                String line = in.readLine();
-                while (!line.contains(disk)){
-                    line = in.readLine();
-                }
-                current = Integer.parseInt(line.substring(line.indexOf("%") - 2, line.indexOf("%")));
-                System.out.println("Current disk use : " + current);
-                if (current >= limit) flag = false;
-                in.close();
-            } catch (Exception e) {
-                System.out.println("Cannot restrict 1.");
-                System.exit(109);
-            }
-        } catch (Exception e) {
-            System.out.println("Cannot restrict 2.");
-            System.exit(110);
-        }
-        return flag;
-    }
-
     public static void main(String[] args) {
 
         Logger logger = Logger.getLogger("");
         logger.setLevel(Level.OFF);
         BoxHelper boxHelper = new BoxHelper();
         boxHelper.getConfigures();
-        String maxDisk = "";
-        int limit = Integer.parseInt(boxHelper.configures.get("diskUsedPercentage").toString());
-        if (limit != -1 && limit != 0) {
-            maxDisk = boxHelper.getMaxDisk();
-        }
         int cpuThreads = Runtime.getRuntime().availableProcessors();
         int count  = 1;
 
@@ -181,36 +91,8 @@ public class BoxHelper {
         while (true){
             ExecutorService executorService = Executors.newFixedThreadPool(cpuThreads);
             System.out.println("\nBoxHelper " + count + " begins at " + time());
-            if (limit != -1 && limit != 0) {
-                if (!boxHelper.canContinue(maxDisk, limit)){
-                    System.out.println("Reached limit, exit.");
-                    if (!"".equals(boxHelper.configures.get("email").toString())) {
-                        MailBySendgrid mailBySendgrid = null;
-                        try {
-                            InetAddress inetAddress = InetAddress.getLocalHost();
-                            if (!"".equals(boxHelper.configures.get("sendgridKey").toString())) {
-                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", boxHelper.configures.get("sendgridKey").toString());
-                            }else {
-                                mailBySendgrid = new MailBySendgrid("seedboxhelper@gmail.com", boxHelper.configures.get("email").toString(), "Disk reached limit!", "Disk reached limit!\n Box IP: " + inetAddress + "\nLog in and check!", DefaultKey.getKey());
-                            }
-                            if (mailBySendgrid.send()){
-                                System.out.println("Email sent.");
-                            }else {
-                                System.out.println("Cannot send email.");
-                            }
-                        } catch (UnknownHostException e) {
-                            System.out.println("Cannot get IP.");
-                        } catch (IOException e) {
-                            System.out.println("Cannot send email.");
-                        }
-                    }
-
-                    System.exit(111);
-                } else {
-                    System.out.println("Under limit, continue.");
-                }
-            }
-
+            Object[] actions = (Object[]) boxHelper.configures.get("action");
+            executorService.submit(new QBChecker(boxHelper.configures.get("webUI").toString(), boxHelper.configures.get("sessionID").toString(), new Long(boxHelper.configures.get("diskLimit").toString()).longValue() * 1073741824, new String[]{actions[0].toString(), actions[1].toString()}));
             nexusPHPS.forEach(nexusPHP -> {
                 executorService.submit(nexusPHP);
             });

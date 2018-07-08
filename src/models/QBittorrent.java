@@ -53,10 +53,11 @@ public class QBittorrent{
             contents.put("urls", links.toString());
             contents.put("dlLimit", new BigDecimal(download * 1024 * 1024 + "").toPlainString());
             contents.put("upLimit", new BigDecimal(upload * 1024 * 1024 + "").toPlainString());
+            contents.put("category", "BoxHelper");
             try {
-                Boolean success =  HttpHelper.doPost(webUI + "/command/download", "Fiddler", sessionID, "127.0.0.1", contents);
-                if (success) System.out.println("Successfully add torrents in " + site + ".");
-                else System.out.println("Cannot add torrents above, please check your session ID.");
+                Boolean success =  HttpHelper.doPostFileForm(webUI + "/command/download", "Fiddler", sessionID, "127.0.0.1", contents);
+                if (success) System.out.println("Successfully add convertTorrents in " + site + ".");
+                else System.out.println("Cannot add convertTorrents above, please check your session ID.");
             } catch (IOException e) {
                 e.printStackTrace();
             }

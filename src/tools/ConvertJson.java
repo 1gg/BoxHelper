@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import models.Torrent;
 import org.openqa.selenium.Cookie;
 
 import java.io.File;
@@ -35,12 +36,12 @@ public class ConvertJson {
         if (webUI.endsWith("/")) webUI = webUI.substring(0, webUI.length() - 1);
         configures.put("webUI", webUI);
         configures.put("sessionID", object.get("sessionID").getAsString());
-        configures.put("diskUsedPercentage", object.get("diskUsedPercentage").getAsInt());
+        configures.put("diskLimit", object.get("diskLimit").getAsInt());
         JsonArray arrayAction = object.get("actionAfterLimit").getAsJsonArray();
         for (JsonElement a: arrayAction) {
             if (a != null || !"".equals(a.getAsString())) action.add(a.getAsString());
         }
-        configures.put("action", action);
+        configures.put("action", action.toArray());
         configures.put("runningCycleInSec", object.get("runningCycleInSec").getAsInt());
         JsonArray arrayURL = object.get("url&speedLimit").getAsJsonArray();
         ArrayList<String> urls = new ArrayList<>();
@@ -112,6 +113,32 @@ public class ConvertJson {
             cookies.add(new Cookie(name, value, domain, path, new Date(expirationDate)));
         }
         return cookies;
+    }
+
+    public static ArrayList<Torrent> convertTorrents(String content){
+        ArrayList<Torrent> torrents = new ArrayList<>();
+        JsonParser jsonParser = new JsonParser();
+        String name, hash;
+        long added_on, completion_on, last_activity, size;
+        int dl_limit, up_limit, num_incomplete;
+        double ratio;
+
+        JsonArray jsonArray = (JsonArray) jsonParser.parse(content);
+        for (JsonElement array: jsonArray) {
+            JsonObject object = array.getAsJsonObject();
+            added_on = object.get("added_on").getAsLong();
+            completion_on = object.get("completion_on").getAsLong();
+            dl_limit = object.get("dl_limit").getAsInt();
+            hash = object.get("hash").getAsString();
+            last_activity = object.get("last_activity").getAsLong();
+            name = object.get("name").getAsString();
+            num_incomplete = object.get("num_incomplete").getAsInt();
+            ratio = object.get("ratio").getAsDouble();
+            size = object.get("size").getAsLong();
+            up_limit = object.get("up_limit").getAsInt();
+            torrents.add(new Torrent(name, hash, added_on, completion_on, last_activity, size, dl_limit, up_limit, num_incomplete, ratio));
+        }
+        return torrents;
     }
 
 }

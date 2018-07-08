@@ -64,8 +64,8 @@ public class NexusPHP implements Runnable {
 
         System.out.println("Searching torrent links from " + driver.getCurrentUrl() + "...");
         try {
-            webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("torrents")));
-            originalString = driver.findElementByClassName("torrents").getAttribute("outerHTML");
+            webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("convertTorrents")));
+            originalString = driver.findElementByClassName("convertTorrents").getAttribute("outerHTML");
         } catch (Exception e) {
             webDriverWait.until(ExpectedConditions.presenceOfElementLocated(By.className("torrent_list")));
             originalString = driver.findElementByClassName("torrent_list").getAttribute("outerHTML");
