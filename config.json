@@ -1,7 +1,7 @@
 {
     "webUI":"http://YOURURL",
     "sessionID":"YOURSCOOKIEVALUE",
-    "diskLimit":1,
+    "diskLimit":1024,
     "actionAfterLimit":["2", "slow"],
     "runningCycleInSec":20,
     "url&speedLimit":[
