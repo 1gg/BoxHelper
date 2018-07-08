@@ -1,11 +1,11 @@
 {
-    "webUI":"",
-    "sessionID":"",
-    "diskUsedPercentage":98,
-    "actionAfterLimit":["delete", "3", "slow"],
+    "webUI":"http://YOURURL",
+    "sessionID":"YOURSCOOKIEVALUE",
+    "diskLimit":1,
+    "actionAfterLimit":["2", "slow"],
     "runningCycleInSec":20,
     "url&speedLimit":[
-	["https://tp.m-team.cc/movie.php", "-1", "-1", "36", "12"]
+	["https://tp.m-team.cc/movie.php", "20", "-1", "36", "12"]
     ],
     "email":"",
     "sendgridKey":""

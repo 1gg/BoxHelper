@@ -7,16 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="125ace7c-ae70-4656-8ce2-f4caafb2a5a3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/models/QBChecker.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/models/Torrents.java" afterPath="$PROJECT_DIR$/src/models/Torrent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.json" afterPath="$PROJECT_DIR$/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/BoxHelper.java" afterPath="$PROJECT_DIR$/src/BoxHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/NexusPHP.java" afterPath="$PROJECT_DIR$/src/models/NexusPHP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/QBittorrent.java" afterPath="$PROJECT_DIR$/src/models/QBittorrent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/ConvertJson.java" afterPath="$PROJECT_DIR$/src/tools/ConvertJson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/HttpHelper.java" afterPath="$PROJECT_DIR$/src/tools/HttpHelper.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -71,8 +63,8 @@
       <file leaf-file-name="QBChecker.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/models/QBChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-572">
-              <caret line="46" column="128" lean-forward="false" selection-start-line="46" selection-start-column="128" selection-end-line="46" selection-end-column="128" />
+            <state relative-caret-position="91">
+              <caret line="38" column="43" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -864,7 +856,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223902000" />
+    <option name="totallyTimeSpent" value="224146000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
@@ -1226,8 +1218,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/models/QBChecker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-572">
-          <caret line="46" column="128" lean-forward="false" selection-start-line="46" selection-start-column="128" selection-end-line="46" selection-end-column="128" />
+        <state relative-caret-position="91">
+          <caret line="38" column="43" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
